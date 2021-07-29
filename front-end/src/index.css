@@ -59,6 +59,14 @@ a.brand{
   padding: 3rem;
   font-weight: bold;
 }
+.badge{
+  background-color: #f02020;
+  color: #fff;
+  border-radius: 50%;
+  padding: 0.2rem 0.7rem;
+  font-size: 1.4rem;
+  margin-left: 0.2rem;
+}
 ul{
   padding: 0;
   margin: 0;
@@ -66,17 +74,22 @@ ul{
 }
 li{
   margin-top: 1rem;
-}
+} 
+input,
+select,
+textarea,
 button{
   padding: 1rem;
   border-radius: .5rem;
   border: 0.1rem #a4a4a4 solid;
-  background-color: #f8f8f8;
-  cursor: pointer;
   font-size: 1.6rem;
   font-family:Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+button{
+  background-color: #f8f8f8;
+  cursor: pointer;
 }
 button.primary{
   background-color:#f0c040 ;
@@ -84,6 +97,9 @@ button.primary{
 button.block{
   width: 100%;
 }
+input:hover,
+select:hover,
+textarea:hover,
 button:hover{
   border: .1rem #404040 solid;
 }
@@ -107,6 +123,9 @@ button:hover{
   margin-right: 2rem;
   margin-bottom: 1rem;
 }
+.min-30{
+  min-width: 30rem;
+}
 img{
   border-radius: 0.5rem;
   vertical-align: middle;
@@ -116,6 +135,10 @@ img.medium{
   width: 100%;
 }
 img.large{
+  width: 100%;
+}
+img.small{
+  max-width:5rem ;
   width: 100%;
 }
 .card{
