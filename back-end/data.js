@@ -1,8 +1,28 @@
+const bcrypt = require('bcrypt');
 const data ={
+    user:[
+        {
+            name:"mohamed",
+            email:"admin@gmail.com",
+            password: bcrypt.hashSync('1234',8),
+            isAdmin: true
+        },
+        {
+            name:"ahmed",
+            email:"ahmed@gmail.com",
+            password: bcrypt.hashSync('1234',8),
+            isAdmin: false,
+        },
+        {
+            name:"omar",
+            email:"omar@gmail.com",
+            password: bcrypt.hashSync('1234',8),
+            isAdmin: false,
+        },
+    ],
     products:[
         {
-            _id:'1',
-            name:'Chair-1',
+            name:'Chair-model-1',
             category:'chairs',
             image:"/images/product-1.jpg",
             price:500,
@@ -13,7 +33,6 @@ const data ={
             description:'high quality product'
         },
         {
-            _id:'2',
             name:'Desk',
             category:'desk',
             image:"/images/product-2.jpg",
@@ -24,7 +43,6 @@ const data ={
             numReviews:9,
             description:'high quality product'
         },{
-            _id:'3',
             name:'Chair-3',
             category:'chairs',
             image:"/images/product-3.jpg",
@@ -35,8 +53,7 @@ const data ={
             numReviews:8,
             description:'high quality product'
         },{
-            _id:'4',
-            name:'Desk',
+            name:'Desk-2',
             category:'desk',
             image:"/images/product-4.jpg",
             price:300,
@@ -46,7 +63,6 @@ const data ={
             numReviews:10,
             description:'high quality product'
         },{
-            _id:'5',
             name:'Chair-5',
             category:'chairs',
             image:"/images/product-5.jpg",

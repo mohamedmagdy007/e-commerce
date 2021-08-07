@@ -10,6 +10,7 @@ import { listProducts } from "../store/action/productAction";
 export default function HomeScreen(){
   const productList = useSelector((state)=>state.ProductList)
   const { loading, error, products } = productList;
+  console.log(products)
   const dispatch = useDispatch();
 
   useEffect(()=>{

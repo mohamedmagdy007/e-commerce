@@ -1,22 +1,31 @@
+require("dotenv").config();
 const express = require("express");
+const morgan = require("morgan");
+const cors = require('cors');
+const db = require("./helpers/dbConnetion");
 const data = require("./data");
-
+const userRouter = require("./routers/userRouter");
+const productRouter = require('./routers/productRouter');
 const app = express();
 
-app.get("/api/products", (req, res) => {
-  res.send(data.products);
+db.connectDB();
+app.use(morgan("dev"));
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }));
+app.use(cors());
+// app.get("/api/products", (req, res) => {
+//   res.send(data.products);
+// });
+
+app.use("/api/users", userRouter);
+app.use("/api/products", productRouter);
+app.get('/', (req, res) => {
+  res.send('Server is ready');
 });
-app.get("/api/products/:id", (req, res) => {
-  const product = data.products.find((x) => x._id === req.params.id);
-  if (product) {
-    res.send(product);
-  } else {
-    res.status(404).send({ message: "product not Found" });
-  }
+app.use((err, req, res, next) => {
+  res.status(500).json({ message: err });
 });
-app.get("/", (req, res) => {
-  res.send("server is ready");
-});
+
 const port = process.env.PORT || 8000;
 app.listen(port, () => {
   console.log(`serve at http://localhost:${port}`);
