@@ -1,19 +1,41 @@
-const jwt = require('jsonwebtoken')
-const util = require('util')
-const signTokenPromiseBased = util.promisify(jwt.sign)
-const verifyTokenPromiseBased = util.promisify(jwt.verify)
-const secret = process.env.SECRET||"MEARNSTACK";
+const jwt = require('jsonwebtoken');
 
+ const generateToken = (user) => {
+  return jwt.sign(
+    {
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin,
+    },
+    process.env.JWT_SECRET || 'somethingsecret',
+    {
+      expiresIn: '30d',
+    }
+  );
+};
 
-const generateToken=(id)=>{
-    return signTokenPromiseBased({id:id},secret)
-}
-
-const verifyToken = (token)=>{
-    return verifyTokenPromiseBased(token,secret)
-}
-
-module.exports = {
+ const isAuth = (req, res, next) => {
+    const { authorization } = req.headers
+  if (authorization) {
+    const token = authorization; // Bearer XXXXXX
+    jwt.verify(
+      token,
+      process.env.JWT_SECRET || 'somethingsecret',
+      (err, decode) => {
+        if (err) {
+          res.status(401).send({ message: 'Invalid Token' });
+        } else {
+          req.user = decode;
+          next();
+        }
+      }
+    );
+  } else {
+    res.status(401).send({ message: 'No Token' });
+  }
+};
+module.exports={
     generateToken,
-    verifyToken
+    isAuth
 }
