@@ -77,7 +77,7 @@ export default function RegisterScreen(props) {
             placeholder="Enter Confirm Password"
             onChange={(e) => setConfirmPassword(e.target.value)}
           ></input>
-            <p className="alert alert-danger">{Err}</p>
+          { error?<p></p> :<p className="alert alert-danger">{Err}</p>}
         </div>
         <div>
           <label />

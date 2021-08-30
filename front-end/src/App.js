@@ -11,6 +11,9 @@ import { signout } from "./store/action/userAction";
 import PaymentScreen from "./pages/paymentScreen";
 import placeOrderScreen from "./pages/placeOrderScreen";
 import OrderScreen from "./pages/orderScreen";
+import OrderHistoryScreen from "./pages/orderHistoryScreen";
+import ProfileScreen from "./pages/profileScreen";
+import PrivateRoute from "./components/privateRoute";
 function App() {
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
@@ -42,7 +45,13 @@ function App() {
                   {userInfo.name} <i className="fa fa-caret-down"></i>
                 </Link>
                 <ul className="dropdown-content">
-                  <Link to="#signout" onClick={signoutHandler}>SignOut</Link>
+                  <li>
+                  <Link to='/profile'>User Profile</Link>
+                  </li>
+                  <li>
+                    <Link to='/orderhistory'>Order History</Link>
+                  </li>
+                  <li> <Link to="#signout" onClick={signoutHandler}>SignOut</Link></li>
                 </ul>
               </div>
             ) : (
@@ -60,6 +69,8 @@ function App() {
           <Route path="/payment" component={PaymentScreen}></Route>
           <Route path="/placeorder" component={placeOrderScreen}></Route>
           <Route path="/order/:id" component={OrderScreen}></Route>
+          <Route path="/orderhistory" component={OrderHistoryScreen}></Route>
+          <PrivateRoute path="/profile" component={ProfileScreen}></PrivateRoute>
         </main>
         <footer className="row center">Alt right reserved</footer>
       </div>
