@@ -35,7 +35,15 @@ const jwt = require('jsonwebtoken');
     res.status(401).send({ message: 'No Token' });
   }
 };
+const isAdmin = (req, res, next)=>{
+  if(req.user && req.user.isAdmin){
+    next()
+  }else{
+    res.status(401).send({ message: 'invalid Admin Token' });
+  }
+}
 module.exports={
     generateToken,
-    isAuth
+    isAuth,
+    isAdmin
 }
