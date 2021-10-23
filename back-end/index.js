@@ -4,9 +4,11 @@ const morgan = require("morgan");
 const cors = require("cors");
 const db = require("./helpers/dbConnetion");
 const data = require("./data");
+const path = require('path');
 const userRouter = require("./routers/userRouter");
 const productRouter = require("./routers/productRouter");
 const orderRouter = require("./routers/orderRouter");
+const uploadRouter = require('./helpers/multer') ;
 const app = express();
 
 db.connectDB();
@@ -14,10 +16,11 @@ app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+app.use("/", express.static(path.join(__dirname, "/images")));
 // app.get("/api/products", (req, res) => {
 //   res.send(data.products);
 // });
-
+app.use('/api/uploads', uploadRouter);
 app.use("/api/users", userRouter);
 app.use("/api/products", productRouter);
 app.use("/api/orders", orderRouter);

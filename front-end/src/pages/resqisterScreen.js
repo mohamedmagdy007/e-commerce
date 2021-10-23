@@ -31,7 +31,11 @@ export default function RegisterScreen(props) {
     }
   }, [props.history, redirect ,userInfo]);
   return (
-    <div>
+    <>
+    <div className="heading-banner" style={{backgroundImage: `linear-gradient(to right bottom, rgba(0, 0, 0, 30%), rgba(0, 0, 0, 30%)), url("images/1.jpg")`}}>
+        <h1>REGISTER</h1>
+    </div>
+    <main>
       <form className="form" onSubmit={submitHandle}>
         <div>
           <h1>Resgister</h1>
@@ -93,6 +97,7 @@ export default function RegisterScreen(props) {
           </div>
         </div>
       </form>
-    </div>
+    </main>
+    </>
   );
 }

@@ -18,7 +18,7 @@ export default function ProductScreen(props) {
     dispatch(detailsProducts(id));
   }, [dispatch]);
   return (
-    <>
+    <main>
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
@@ -104,6 +104,6 @@ export default function ProductScreen(props) {
           </div>
         </div>
       )}
-    </>
+    </main>
   );
 }

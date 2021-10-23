@@ -29,8 +29,12 @@ export default function PlaceOrderScreen(props) {
     }
   },[dispath,order,props.history,success])
   return (
-    <div>
+    <>
       <CheckoutStep step1 step2 step3 step4></CheckoutStep>
+     <div className="heading-banner" style={{backgroundImage: `linear-gradient(to right bottom, rgba(0, 0, 0, 30%), rgba(0, 0, 0, 30%)), url("images/1.jpg")`}}>
+        <h1>ORDER</h1>
+    </div>
+    <main>
       <div className="row top">
         <div className="col-2">
           <ul>
@@ -142,6 +146,7 @@ export default function PlaceOrderScreen(props) {
             </div>
         </div>
       </div>
-    </div>
+    </main>
+    </>
   );
 }

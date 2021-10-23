@@ -24,8 +24,12 @@ export default function ShippingScreen(props) {
     props.history.push("/payment");
   };
   return (
-    <div>
+    <>
       <CheckoutStep step1 step2></CheckoutStep>
+    <div className="heading-banner" style={{backgroundImage: `linear-gradient(to right bottom, rgba(0, 0, 0, 30%), rgba(0, 0, 0, 30%)), url("images/1.jpg")`}}>
+        <h1>SHIPPING</h1>
+    </div>
+    <main>
       <form className="form" onSubmit={submitHandler}>
         <div>
           <h1>Shipping Address</h1>
@@ -92,6 +96,7 @@ export default function ShippingScreen(props) {
           </button>
         </div>
       </form>
-    </div>
+    </main>
+    </>
   );
 }

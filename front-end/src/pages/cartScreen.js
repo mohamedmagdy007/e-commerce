@@ -24,7 +24,12 @@ export default function CartScreen(props) {
       props.history.push('/signin?redirect=shipping')
   }
   return (
-    <div className="row top">
+    <>
+    <div className="heading-banner" style={{backgroundImage: `linear-gradient(to right bottom, rgba(0, 0, 0, 30%), rgba(0, 0, 0, 30%)), url("images/1.jpg")`}}>
+        <h1>CART</h1>
+    </div>
+    <main>
+    <div className="row top" >
       <div className="col-2">
         <h2>Shopping Cart</h2>
         {cartItems.length === 0 ? (
@@ -96,5 +101,7 @@ export default function CartScreen(props) {
         </div>
       </div>
     </div>
+    </main>
+    </>
   );
 }

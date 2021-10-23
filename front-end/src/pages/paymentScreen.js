@@ -16,8 +16,12 @@ export default function PaymentScreen(props) {
     props.history.push("/placeorder");
   };
   return (
-    <div>
+    <>
       <CheckoutStep step1 step2 step3></CheckoutStep>
+     <div className="heading-banner" style={{backgroundImage: `linear-gradient(to right bottom, rgba(0, 0, 0, 30%), rgba(0, 0, 0, 30%)), url("images/1.jpg")`}}>
+        <h1>PAYMENT</h1>
+    </div>
+    <main>
       <form className="form" onSubmit={submitHandler}>
         <div>
           <h1>Payment</h1>
@@ -56,6 +60,7 @@ export default function PaymentScreen(props) {
             </button>
           </div>
       </form>
-    </div>
+    </main>
+    </>
   );
 }

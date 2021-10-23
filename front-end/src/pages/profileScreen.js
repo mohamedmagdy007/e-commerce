@@ -34,7 +34,12 @@ export default function ProfileScreen() {
         dispatch(updateUserProfile({userId:user._id,name, email, password}));
     }
   };
-  return <div>
+  return( 
+      <>
+       <div className="heading-banner" style={{backgroundImage: `linear-gradient(to right bottom, rgba(0, 0, 0, 30%), rgba(0, 0, 0, 30%)), url("images/1.jpg")`}}>
+        <h1>PROFILE</h1>
+    </div>
+      <main>
       <form className="form" onSubmit={submitHandler}>
             <div>
                 <h1>User Profile</h1>
@@ -77,5 +82,7 @@ export default function ProfileScreen() {
                 </>
             }
       </form>
-  </div>;
+  </main>
+  </>
+  );
 }

@@ -4,6 +4,7 @@ import Rating from "./Rating";
 
 export default function Product(props){
     const {product} = props;
+    { if(product!=""){
     return (
         <div className="card" key={product._id}>
                 <div className="card-header">
@@ -11,7 +12,7 @@ export default function Product(props){
                         <span className="price">
                             $ {product.price}
                         </span>
-                        <img className="medium" src={product.image} alt="product" />
+                        <img className="medium" src={`${product.image}`} alt="product" />
                     </Link>
                 </div>
                 <div className="card-body">
@@ -23,5 +24,13 @@ export default function Product(props){
                     </div>
                 </div>
             </div>
-    )
-}
+               )
+    }else{
+        return(
+            <p>
+            not found
+          </p>
+        )
+    }
+}}       
+    

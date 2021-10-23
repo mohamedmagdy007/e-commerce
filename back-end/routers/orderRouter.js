@@ -1,11 +1,16 @@
 const express = require("express");
 const Order = require("../models/orderModel");
 
-const { isAuth } = require("../helpers/Token");
+const { isAuth, isAdmin } = require("../helpers/Token");
 const orderRouter = express.Router();
 
-orderRouter.get('/mine', isAuth, async (req, res) => {
-  const orders = await Order.find( {user:req.user._id} );
+orderRouter.get("/", isAuth, isAdmin, async (req, res) => {
+  const orders = await Order.find({}).populate("user", "name");
+  res.send(orders);
+});
+
+orderRouter.get("/mine", isAuth, async (req, res) => {
+  const orders = await Order.find({ user: req.user._id });
   res.send(orders);
 });
 orderRouter.post("/", isAuth, async (req, res) => {
@@ -51,4 +56,30 @@ orderRouter.put("/:id/pay", isAuth, async (req, res) => {
     res.status(404).send({ message: "Order Not Found" });
   }
 });
+orderRouter.delete("/:id", isAuth, isAdmin, async (req, res) => {
+  const order = await Order.findById(req.params.id);
+  if (order) {
+    const deleteOrder = await order.remove();
+    res.send({ message: "Order Deleted", order: deleteOrder });
+  } else {
+    res.status(404).send({ message: "Order Not Found" });
+  }
+});
+orderRouter.put(
+  '/:id/deliver',
+  isAuth,
+  isAdmin,
+  async (req, res) => {
+    const order = await Order.findById(req.params.id);
+    if (order) {
+      order.isDelivered = true;
+      order.deliveredAt = Date.now();
+
+      const updatedOrder = await order.save();
+      res.send({ message: 'Order Delivered', order: updatedOrder });
+    } else {
+      res.status(404).send({ message: 'Order Not Found' });
+    }
+  }
+);
 module.exports = orderRouter;
