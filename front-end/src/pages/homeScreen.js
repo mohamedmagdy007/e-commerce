@@ -21,7 +21,7 @@ export default function HomeScreen() {
         <div className="row top" style={{justifyContent:"center"}}>
           <div className="text-center">
             <h1 className="heading">Creative Design <br/> Modern &amp; Exclusive Furniture</h1>
-              <button className="btn link-red">SHOPING NOW</button>
+              <button className="link-red">SHOPING NOW</button>
           </div>
         </div>
       </section>
@@ -31,13 +31,13 @@ export default function HomeScreen() {
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <>
-        <div className="row center">
+        <div className="row center" style={{margin:"20px 0"}}>
           {products.slice(0,4).map((product) => (
             <Product key={product._id} product={product} />
           ))}
         </div>
         <div className="row center" style={{padding:"10px 0"}}>
-            <Link className="btn link-red" to="/productsAll">Show More</Link>
+            <Link className="link-red" to="/productsAll">Show More</Link>
         </div>
         </>
       )}

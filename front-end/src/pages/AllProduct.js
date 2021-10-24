@@ -29,15 +29,15 @@ export default function AllProduct() {
             <span style={{ position: "absolute", top: "8px", right: "4px" }}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="icon icon-tabler icon-tabler-search"
+                className="icon icon-tabler icon-tabler-search"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
-                stroke-width="1.5"
+                strokeWidth="1.5"
                 stroke="#000000"
                 fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                 <circle cx="10" cy="10" r="7" />
@@ -46,7 +46,7 @@ export default function AllProduct() {
             </span>
 
             <input
-              placeholder="Search"
+              placeholder="Search By Name"
               type="text"
               value={inputVal}
               onChange={(e) => {
@@ -62,7 +62,7 @@ export default function AllProduct() {
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <>
-          <div className="row prosucts-item">
+          <div className="row center">
             {products
               .filter((item) => item.name.includes(inputVal))
               .map((product) => (
