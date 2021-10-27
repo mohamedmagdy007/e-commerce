@@ -19,7 +19,7 @@ export default function HomeScreen() {
     <>
       <section style={{ backgroundImage: `linear-gradient(to right bottom, rgba(0, 0, 0, 30%), rgba(0, 0, 0, 30%)), url(${"/images/hero-1.jpg"})`}}>
         <div className="row top" style={{justifyContent:"center"}}>
-          <div className="text-center">
+          <div className="text-center text_banner">
             <h1 className="heading">Creative Design <br/> Modern &amp; Exclusive Furniture</h1>
               <button className="link-red">SHOPING NOW</button>
           </div>

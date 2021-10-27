@@ -39,19 +39,29 @@ userRouter.post("/signin", async (req, res, next) => {
   }
 });
 userRouter.post("/register", async (req, res) => {
-  const user = new User({
-    name: req.body.name,
-    email: req.body.email,
-    password: bcrypt.hashSync(req.body.password, saltRounds),
-  });
-  const createdUser = await user.save();
-  res.send({
-    _id: createdUser._id,
-    name: createdUser.name,
-    email: createdUser.email,
-    isAdmin: createdUser.isAdmin,
-    token: generateToken(createdUser),
-  });
+  try{
+    existingUser = await User.findOne({ email:req.body.email });
+    if(existingUser){
+      return res.status(400).json({ message: "Email already exists" });
+    }else{
+      const user = new User({
+        name: req.body.name,
+        email: req.body.email,
+        password: bcrypt.hashSync(req.body.password, saltRounds),
+      });
+      const createdUser = await user.save();
+      res.send({
+        _id: createdUser._id,
+        name: createdUser.name,
+        email: createdUser.email,
+        isAdmin: createdUser.isAdmin,
+        token: generateToken(createdUser),
+      });
+    }
+  }catch(err){
+    return res.status(400).json(err);
+  }
+  
 });
 
 userRouter.get("/:id", async (req, res) => {
