@@ -1,31 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { register } from "../store/action/userAction";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
-import { Formik, Form, Field } from "formik";
+import { Formik, Field } from "formik";
 import * as Yup from "yup";
 export default function RegisterScreen(props) {
-  // const [name, setName] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [confirmPassword, setConfirmPassword] = useState("");
-  // const [Err, seterror] = useState("");
   const dispatch = useDispatch();
   const redirect = props.location.search
     ? props.location.search.split("=")[1]
     : "/";
   const userResgister = useSelector((state) => state.userRegister);
   const { userInfo, loading, error } = userResgister;
-  // const submitHandle = (e) => {
-  //   e.preventDefault();
-  //   if(password !== confirmPassword){
-  //       seterror('Password and confirm password are not match')
-  //   }else{
-  //       dispatch(register(name, email, password));
-  //   }
-  // };
   useEffect(() => {
     if (userInfo) {
       props.history.push(redirect);

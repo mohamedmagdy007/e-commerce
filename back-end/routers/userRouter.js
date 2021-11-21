@@ -7,13 +7,12 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const { generateToken } = require("../helpers/Token");
 const { isAuth } = require("../helpers/Token");
-userRouter.get(
-  `/seed`,
-  asyncHandler(async (req, res) => {
-    await User.remove({});
-    const createUsers = await User.insertMany(data.user);
-    res.send({ createUsers });
-  })
+const Token = require("../models/ResetPasswordToken");
+const sendEmail = require("../helpers/sendEmail");
+const GoogleStrategy = require( 'passport-google-oauth2' ).Strategy;
+const { OAuth2Client } = require("google-auth-library");
+const client = new OAuth2Client(
+  "250957011123-idjuenirgj99td96d8fl8ttdgq9ejskt.apps.googleusercontent.com"
 );
 userRouter.post("/signin", async (req, res, next) => {
   const { body } = req;
@@ -91,6 +90,51 @@ userRouter.put("/profile",isAuth ,async (req, res) => {
     });
   } else {
     res.status(404).send({ message: "User Not Found" });
+  }
+});
+userRouter.post("/resetPassword/:userId/:token", async (req, res) => {
+  try {
+      const user = await User.findById(req.params.userId);
+      if (!user) return res.status(400).send("invalid link or expired");
+
+      const token = await Token.findOne({
+          userId: user._id,
+          token: req.params.token,
+      });
+      if (!token) return res.status(400).send("Invalid link or expired");
+      const salt = await bcrypt.genSalt(saltRounds);
+      const hashedPassword = await bcrypt.hash(req.body.password, salt);
+      req.body.password = hashedPassword;
+      user.password = req.body.password;
+      await user.save();
+      await token.delete();
+      res.status(200).send("password reset sucessfully.");
+  } catch (error) {
+      res.status(500).send("An error occured");
+      console.log(error);
+  }
+});
+userRouter.post("/resetPassword",async (req, res) => {
+  try{
+   const user = await User.findOne({ email:req.body.email });
+    if(!user){
+      return res.status(400).send({message:"user with given email doesn't exist"})
+    }
+    let token = await Token.findOne({ userId: user._id });
+    if(!token){
+      const myToken = await generateToken(user._id);
+      token = await new Token({
+        userId: user._id,
+        token: myToken,
+    }).save();
+  }
+    const link = `${process.env.BASE_URL}/password-reset/${user._id}/${token.token}`;
+    await sendEmail(user.email, link);
+    res.status(200).send({message:"password reset link sent to your email account"});
+}
+  catch(err){
+    res.status(500).send("An error occured");
+    console.log(err)
   }
 });
 module.exports = userRouter;

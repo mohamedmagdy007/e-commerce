@@ -25,6 +25,30 @@ export const userRegisterReducer = (state = {}, action) => {
       return state;
   }
 };
+export const userForgetpassReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "FORGET_PASS_REQUEST":
+      return { loading: true };
+    case "FORGET_PASS_SUCCESS":
+      return { loading: false, success:true };
+    case "FORGET_PASS_FAIL":
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+export const userResetPassReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "RESET_PASS_REQUEST":
+      return { loading: true };
+    case "RESET_PASS_SUCCESS":
+      return { loading: false, success:true };
+    case "RESET_PASS_FAIL":
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
 
 export const userDetailsReducer = (state = {loading:true}, action) => {
   switch (action.type) {

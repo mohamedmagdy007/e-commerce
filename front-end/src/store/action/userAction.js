@@ -43,6 +43,44 @@ export const singin = (email, password) => async (dispatch) => {
     });
   }
 };
+export const ForgetPass= (email) => async (dispatch) => {
+  dispatch({
+    type: "FORGET_PASS_REQUEST",
+    payload: { email},
+  });
+  try {
+    const { data } = await axios.post(`/api/users/resetPassword`,  email);
+    dispatch({ type: "FORGET_PASS_SUCCESS", payload: data });
+    // localStorage.setItem("userInfo", JSON.stringify(data));
+  } catch (error) {
+    dispatch({
+      type: "FORGET_PASS_FAIL",
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+export const resetPassword = (passId,tokenId,password) => async (dispatch) => {
+  dispatch({
+    type: "RESET_PASS_REQUEST",
+    payload: { password},
+  });
+  try {
+    const { data } = await axios.post(`/api/users/resetPassword/${passId}/${tokenId}`,  password);
+    dispatch({ type: "RESET_PASS_SUCCESS", payload: data });
+    // localStorage.setItem("userInfo", JSON.stringify(data));
+  } catch (error) {
+    dispatch({
+      type: "RESET_PASS_FAIL",
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
 export const signout = () => (dispatch) => {
   localStorage.removeItem("userInfo");
   localStorage.removeItem("cartItems");

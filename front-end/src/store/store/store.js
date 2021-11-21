@@ -11,7 +11,9 @@ import {
 import { cartReducer } from "../reducers/cartReducers";
 import {
   userDetailsReducer,
+  userForgetpassReducer,
   userRegisterReducer,
+  userResetPassReducer,
   userSigninReducer,
   userUpdateReducer,
 } from "../reducers/userReducers";
@@ -57,7 +59,9 @@ const reducer = combineReducers({
   productDelete: productDeleteReducer,
   orderList:orderListReducer,
   orderDelete:orderDeleteReducer,
-  orderDeliver:orderDeliverReducer
+  orderDeliver:orderDeliverReducer,
+  forgetPass:userForgetpassReducer,
+  resetPass:userResetPassReducer,
 });
 
 const store = createStore(

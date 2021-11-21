@@ -21,7 +21,8 @@ import Footer from "./components/Footer";
 import OrderListScreen from "./pages/OrderListScreen";
 import CreateProduct from "./pages/CreateProduct";
 import AllProduct from "./pages/AllProduct";
-
+import ForgetPassword from "./pages/ForgetPassword";
+import ResetPassword from "./pages/ResetPassword";
 function App() {
   const history = createBrowserHistory();
   return (
@@ -39,6 +40,8 @@ function App() {
         <Route path="/placeorder" component={placeOrderScreen}></Route>
         <Route path="/order/:id" component={OrderScreen}></Route>
         <Route path="/orderhistory" component={OrderHistoryScreen}></Route>
+        <Route path="/sendresetemail" component={ForgetPassword}></Route>
+        <Route path="/password-reset/:id/:token" component={ResetPassword} exact></Route>
         <Route
           path="/product/:id/edit"
           component={ProductEditScreen}

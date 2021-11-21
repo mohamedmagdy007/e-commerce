@@ -4,11 +4,12 @@ import Rating from "./Rating";
 
 export default function Product(props) {
   const { product } = props;
-
+// console.log(product===null?"111":"hhh")
   return (
-    <div className="card" key={product._id}>
+    <>
+    {product ? (
+      <div className="card" key={product._id}>
       <div className="card__side card__side--front" style={{backgroundImage:`url(${product.image})`,backgroundRepeat:"no-repeat",backgroundSize:"cover",backgroundPosition:"center center"}}>
-          {/* <img className="large" src={`${product.image}`} alt="product" /> */}
       </div>
       <div className="card__side card__side--back">
           <h2>{product.name}</h2>
@@ -21,5 +22,9 @@ export default function Product(props) {
         </div>
       </div>
     </div>
+    ):(
+      <p>Not Found</p>
+    )}
+    </>
   );
 }

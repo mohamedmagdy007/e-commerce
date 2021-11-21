@@ -371,13 +371,13 @@ border-color: #f02020;
   transform: rotateY(180deg);
   background-image: linear-gradient(to right bottom, #f3f3f3, #e4e4e4);
 }
-/* .card:hover {
-  box-shadow: 1px 25px 54px rgb(0 0 0 / 12%);
+.filter-item{
+  display: flex;
+  justify-content: space-around;
 }
-.card-header {
-  position: relative;
-  overflow: hidden;
-}*/
+input[type="text"] {
+  padding-left: 28px;
+}
 .text-vaildtion{
   color: #c87065;
 }
@@ -549,9 +549,20 @@ border-color: #f02020;
   .card {
     width: calc((100% - 6rem) / 2);
   }
+ 
 }
-@media (max-width: 575.98px) {
+@media (max-width: 595.98px) {
   .card {
     width: 100%;
   }
+  .filter-item{
+  display: block;
+  margin: auto;
+  }
+  .filter-sort{
+    margin-top: 10px;
+  } 
+  .filter-category{
+    margin-top: 10px;
+  } 
 }
