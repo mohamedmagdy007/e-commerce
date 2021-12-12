@@ -41,7 +41,11 @@ function App() {
         <Route path="/order/:id" component={OrderScreen}></Route>
         <Route path="/orderhistory" component={OrderHistoryScreen}></Route>
         <Route path="/sendresetemail" component={ForgetPassword}></Route>
-        <Route path="/password-reset/:id/:token" component={ResetPassword} exact></Route>
+        <Route
+          path="/password-reset/:id/:token"
+          component={ResetPassword}
+          exact
+        ></Route>
         <Route
           path="/product/:id/edit"
           component={ProductEditScreen}

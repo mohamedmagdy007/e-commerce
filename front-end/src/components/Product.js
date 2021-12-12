@@ -4,27 +4,39 @@ import Rating from "./Rating";
 
 export default function Product(props) {
   const { product } = props;
-// console.log(product===null?"111":"hhh")
   return (
     <>
-    {product ? (
       <div className="card" key={product._id}>
-      <div className="card__side card__side--front" style={{backgroundImage:`url(${product.image})`,backgroundRepeat:"no-repeat",backgroundSize:"cover",backgroundPosition:"center center"}}>
-      </div>
-      <div className="card__side card__side--back">
+        <div className="card-hover">
+          <img
+            src={`${product.image}`}
+            className="img-prodcut"
+            alt={`${product.image}`}
+          />
+          <Link to={`/product/${product._id}`} className="details">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon icon-tabler icon-tabler-search"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="#ffffff"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <circle cx="10" cy="10" r="7" />
+              <line x1="21" y1="21" x2="15" y2="15" />
+            </svg>
+          </Link>
+        </div>
+        <div className="row">
           <h2>{product.name}</h2>
           <p className="price text-center">$ {product.price}</p>
-        <div className="text-center">
-          <Rating rating={product.rating} numReviews={product.numReviews} />
-        <Link to={`/product/${product._id}`} className="btn btn--white">
-            SHOPPING NOW
-        </Link>
         </div>
       </div>
-    </div>
-    ):(
-      <p>Not Found</p>
-    )}
     </>
   );
 }

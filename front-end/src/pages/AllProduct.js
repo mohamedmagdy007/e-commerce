@@ -13,7 +13,7 @@ export default function AllProduct() {
   const [filter, setFilter] = useState({
     sort: "",
     category: "",
-    inputVal:"",
+    inputVal: "",
     products: products,
   });
   const sortProducts = (event) => {
@@ -49,19 +49,18 @@ export default function AllProduct() {
       });
     }
   };
- const searchProducts = (e)=>{
-  
-  if (e.target.value === "") {
-    setFilter({ search: e.target.value, products: products });
-  } else {
-    setFilter({
-      search: e.target.value,
-      products: products.filter((product) =>
-        product.name.includes(e.target.value)
-      ),
-    });
-  }
- }
+  const searchProducts = (e) => {
+    if (e.target.value === "") {
+      setFilter({ search: e.target.value, products: products });
+    } else {
+      setFilter({
+        search: e.target.value,
+        products: products.filter((product) =>
+          product.name.includes(e.target.value)
+        ),
+      });
+    }
+  };
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(listProducts());
@@ -76,9 +75,9 @@ export default function AllProduct() {
       >
         <h1>SHOP</h1>
       </div>
-      <main>
+      <div className="container">
         <div className="row filter-item">
-        <div style={{ position: "relative", marginTop: "10px" }}>
+          <div style={{ position: "relative", marginTop: "10px" }}>
             <span style={{ position: "absolute", top: "8px", left: "4px" }}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -102,7 +101,9 @@ export default function AllProduct() {
               placeholder="Search By Name"
               type="text"
               value={inputVal}
-              onChange={(e)=>{setInputVal(e.target.value)}}
+              onChange={(e) => {
+                setInputVal(e.target.value);
+              }}
             />
           </div>
           <Filter
@@ -114,22 +115,21 @@ export default function AllProduct() {
             searchProducts={searchProducts}
           ></Filter>
         </div>
-      </main>
+      </div>
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
-        <>
-          <div className="row center">
+        <div className="container">
+          <div className="prodcut-grid">
             {(filter.products.length === 0 ? products : filter?.products)
               .filter((item) => item.name.includes(inputVal))
               .map((product) => (
-                <Product  key={product._id} product={product} />
-              ))
-              }
+                <Product key={product._id} product={product} />
+              ))}
           </div>
-        </>
+        </div>
       )}
     </>
   );
